@@ -1,0 +1,13 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "enggo_w9",
+  "outputfilename": "enggo_w9",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "kuishen2001",
+    "email": "138394990+kuishen2001@users.noreply.github.com"
+  }
+}
