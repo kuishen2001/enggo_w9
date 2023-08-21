@@ -1,21 +1,34 @@
+<!-- App.svelte -->
 <script>
   import logo from './assets/images/logo-universal.png'
-  import {Greet} from '../wailsjs/go/main/App.js'
+  import { Query, Search } from '../wailsjs/go/main/App.js'
 
-  let resultText = "Please enter your name below 👇"
-  let name
+  let resultText = "Please enter your query below 👇"
+  let queryterm = "";
+  let queryInfo = "";
 
-  function greet() {
-    Greet(name).then(result => resultText = result)
+  async function search() {
+    console.log("Search button clicked");
+    try {
+      const result = await Query(queryterm);
+      resultText = result;
+    } catch (error) {
+      resultText = "An error occurred: " + error.message;
+      console.error("Error in search:", error);
+    }
   }
 </script>
 
 <main>
-  <img alt="Wails logo" id="logo" src="{logo}">
+  <img alt="Wails logo" id="logo" src={logo}>
   <div class="result" id="result">{resultText}</div>
   <div class="input-box" id="input">
-    <input autocomplete="off" bind:value={name} class="input" id="name" type="text"/>
-    <button class="btn" on:click={greet}>Greet</button>
+    <input autocomplete="off" bind:value={queryterm} class="input" id="queryterm" type="text"/>
+    <button class="btn" on:click={search}>Search</button>
+  </div>
+  <div class="query-info" id="query-info">
+    <h2>Query Info:</h2>
+    <pre>{queryInfo}</pre>
   </div>
 </main>
 
