@@ -49,7 +49,6 @@ func dbUpdate() error {
 
 	// Specify the full path to dbFile
 	fn := filepath.Join(wd, dbDir, dbFile)
-	fmt.Println(fn)
 	//fn := "C:\\Users\\xxxxxxx\\Documents\\GitHub\\enggo\\enggo_w9\\db\\QandA.db"
 
 	db, err := sql.Open("sqlite", fn)
@@ -76,7 +75,6 @@ func (a *App) Query(queryterm string) string {
 
 	// Specify the full path to dbFile
 	fn := filepath.Join(wd, dbDir, dbFile)
-	//fn := "C:\\Users\\xxxxxxx\\Documents\\GitHub\\enggo\\enggo_w9\\db\\QandA.db"
 
 	db, err := sql.Open("sqlite", fn)
 	if err != nil {
@@ -95,13 +93,21 @@ func (a *App) Query(queryterm string) string {
 	}
 
 	var queryResults string
+	foundResults := false
+
 	for rows.Next() {
 		var id int
 		var question string
 		var answer string
 		rows.Scan(&id, &question, &answer)
 		queryResults += fmt.Sprintf("Your query for %s returned: %s\n", question, answer)
+		foundResults = true
 	}
+
+	if !foundResults {
+		queryResults = fmt.Sprintf("Your query for %s returned no result\n", queryterm)
+	}
+
 	a.QueryInfo = queryResults
 
 	return a.QueryInfo // Return the query results and no error

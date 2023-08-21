@@ -27,7 +27,6 @@
     <button class="btn" on:click={search}>Search</button>
   </div>
   <div class="query-info" id="query-info">
-    <h2>Query Info:</h2>
     <pre>{queryInfo}</pre>
   </div>
 </main>
