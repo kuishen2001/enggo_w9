@@ -57,9 +57,10 @@ func dbUpdate() error {
 	}
 
 	if _, err = db.Exec(`
-INSERT OR IGNORE INTO qat (id, question, answer)
-VALUES (24, "'default'", "'used within a switch statement to specify a block of code that should be executed when none of the case conditions match the value being switched'");
-`); err != nil {
+        INSERT OR IGNORE INTO qat (id, question, answer)
+        SELECT 24, "'default'", "'used within a switch statement to specify a block of code that should be executed when none of the case conditions match the value being switched'"
+        WHERE NOT EXISTS (SELECT 1 FROM qat WHERE id = 24);
+    `); err != nil {
 		return err
 	}
 	return nil

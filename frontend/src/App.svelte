@@ -1,6 +1,6 @@
 <!-- App.svelte -->
 <script>
-  import logo from './assets/images/logo-universal.png'
+  import logo from './assets/images/GoQuery.png'
   import { Query, Search } from '../wailsjs/go/main/App.js'
 
   let resultText = "Please enter your query below 👇"
@@ -24,8 +24,8 @@
   <div class="result" id="result">{resultText}</div>
   <div class="input-box" id="input">
     <input autocomplete="off" bind:value={queryterm} class="input" id="queryterm" type="text"/>
-    <button class="btn" on:click={search}>Search</button>
   </div>
+  <button class="btn" on:click={search}>Search</button>
   <div class="query-info" id="query-info">
     <pre>{queryInfo}</pre>
   </div>
